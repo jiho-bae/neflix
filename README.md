@@ -11,8 +11,11 @@ Learning React and ES6 by building a Movie Discoer App.
 
 ## API Verbs
 
-- [ ] Now Playing (Movie)
-- [ ] Upcoming (Movie)
-- [ ] Top rated (TV, Movie)
-- [ ] Popular (TV, Movie)
-- [ ] Airing Today (TV)
+- [x] Now Playing (Movie)
+- [x] Upcoming (Movie)
+- [x] Popular (TV, Movie)
+- [x] Top rated (TV)
+- [x] Airing Today (TV)
+- [x] TV Show Detail
+- [x] Movie Detail
+- [x] Search (Movie, TV)
