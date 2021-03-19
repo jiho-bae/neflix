@@ -28,20 +28,20 @@ const SearchPresenter = ({ movieResults, tvResults, loading, error, searchTerm, 
       <title>Search | Neflix</title>
     </Helmet>
     <Form onSubmit={handleSubmit}>
-      <Input placeholder="Search Movies or TV Shows..." value={searchTerm} onChange={updateTerm} />
+      <Input placeholder="TV 프로그램, 영화 제목을 검색하세요!" value={searchTerm} onChange={updateTerm} />
     </Form>
     {loading ? (
       <Loader />
     ) : (
       <>
         {movieResults && movieResults.length > 0 && (
-          <Section title="Movie Results">
+          <Section title="관련된 영화">
             {movieResults.map((movie) => (
               <Poster
                 key={movie.id}
                 id={movie.id}
                 imageUrl={movie.poster_path}
-                title={movie.original_title}
+                title={movie.title}
                 rating={movie.vote_average}
                 year={movie.release_date.substring(0, 4)}
                 isMovie={true}
@@ -50,13 +50,13 @@ const SearchPresenter = ({ movieResults, tvResults, loading, error, searchTerm, 
           </Section>
         )}
         {tvResults && tvResults.length > 0 && (
-          <Section title="TV Show Results">
+          <Section title="관련된 TV 프로그램">
             {tvResults.map((show) => (
               <Poster
                 key={show.id}
                 id={show.id}
                 imageUrl={show.poster_path}
-                title={show.original_name}
+                title={show.name}
                 rating={show.vote_average}
                 year={show.first_air_date.substring(0, 4)}
                 isMovie={false}

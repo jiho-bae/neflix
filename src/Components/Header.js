@@ -12,7 +12,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   background-color: rgba(20, 20, 20, 0.8);
-  z-index: 10;
+  z-index: 9;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
 
@@ -38,13 +38,13 @@ export default withRouter(({ location: { pathname } }) => (
   <Header>
     <List>
       <Item current={pathname === "/"}>
-        <SLink to="/">Movies</SLink>
+        <SLink to="/">영화</SLink>
       </Item>
       <Item current={pathname === "/tv"}>
         <SLink to="/tv">TV</SLink>
       </Item>
       <Item current={pathname === "/search"}>
-        <SLink to="/search">Search</SLink>
+        <SLink to="/search">검색</SLink>
       </Item>
     </List>
   </Header>

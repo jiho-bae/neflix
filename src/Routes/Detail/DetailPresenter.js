@@ -69,6 +69,16 @@ const Overview = styled.p`
   width: 70%;
 `;
 
+const IMDBLink = styled.span`
+  padding: 2px 5px;
+  background-color: #f1c40f;
+  border-radius: 5px;
+  color: #2980b9;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
     <>
@@ -94,14 +104,35 @@ const DetailPresenter = ({ result, loading, error }) =>
           }
         ></Cover>
         <Data>
-          <Title>{result.original_title ? result.original_title : result.original_name}</Title>
+          <Title>{result.title ? result.title : result.name}</Title>
           <ItemContainer>
             <Item>{result.release_date ? result.release_date.substring(0, 4) : result.first_air_date.substring(0, 4)}</Item>
             <Divider>·</Divider>
-            <Item>{result.runtime ? result.runtime : result.episode_run_time[0]} min </Item>
+            <Item>{result.runtime ? result.runtime : result.episode_run_time[0]} 분 </Item>
             <Divider>·</Divider>
             <Item>
               {result.genres && result.genres.map((genre, index) => (index === result.genres.length - 1 ? genre.name : `${genre.name} / `))}{" "}
+            </Item>
+            {result.imdb_id ? (
+              <>
+                {" "}
+                <Divider>·</Divider>
+                <IMDBLink
+                  role="link"
+                  aria-label="Open IMDB page"
+                  onClick={() => window.open(`https://www.imdb.com/title/${result.imdb_id}`, "_blank")}
+                >
+                  IMDB
+                </IMDBLink>
+              </>
+            ) : null}
+            <Divider>·</Divider>
+            <Item>
+              {" "}
+              <span role="img" aria-label="rating">
+                ⭐️
+              </span>{" "}
+              {result.vote_average}
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>

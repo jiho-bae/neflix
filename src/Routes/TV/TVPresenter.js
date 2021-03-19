@@ -21,13 +21,13 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
     ) : (
       <Container>
         {topRated && topRated.length > 0 && (
-          <Section title="Top Rated Shows">
+          <Section title="평점이 좋은 TV 프로그램">
             {topRated.map((show) => (
               <Poster
                 key={show.id}
                 id={show.id}
                 imageUrl={show.poster_path}
-                title={show.original_name}
+                title={show.name}
                 rating={show.vote_average}
                 year={show.first_air_date.substring(0, 4)}
                 isMovie={false}
@@ -36,13 +36,13 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
           </Section>
         )}
         {popular && popular.length > 0 && (
-          <Section title="Popular Shows">
+          <Section title="인기있는 TV 프로그램">
             {popular.map((show) => (
               <Poster
                 key={show.id}
                 id={show.id}
                 imageUrl={show.poster_path}
-                title={show.original_name}
+                title={show.name}
                 rating={show.vote_average}
                 year={show.first_air_date.substring(0, 4)}
                 isMovie={false}
@@ -51,13 +51,13 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
           </Section>
         )}
         {airingToday && airingToday.length > 0 && (
-          <Section title="Airing Today">
+          <Section title="오늘 방영하는 TV 프로그램">
             {airingToday.map((show) => (
               <Poster
                 key={show.id}
                 id={show.id}
                 imageUrl={show.poster_path}
-                title={show.original_name}
+                title={show.name}
                 rating={show.vote_average}
                 year={show.first_air_date.substring(0, 4)}
                 isMovie={false}

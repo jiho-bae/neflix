@@ -21,13 +21,13 @@ const HomePresenter = ({ nowPlaying, upComing, popular, loading, error }) => (
     ) : (
       <Container>
         {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="Now Playing">
+          <Section title="현재 상영중">
             {nowPlaying.map((movie) => (
               <Poster
                 key={movie.id}
                 id={movie.id}
                 imageUrl={movie.poster_path}
-                title={movie.original_title}
+                title={movie.title}
                 rating={movie.vote_average}
                 year={movie.release_date.substring(0, 4)}
                 isMovie={true}
@@ -36,13 +36,13 @@ const HomePresenter = ({ nowPlaying, upComing, popular, loading, error }) => (
           </Section>
         )}
         {upComing && upComing.length > 0 && (
-          <Section title="Upcoming Movies">
+          <Section title="개봉 예정 영화">
             {upComing.map((movie) => (
               <Poster
                 key={movie.id}
                 id={movie.id}
                 imageUrl={movie.poster_path}
-                title={movie.original_title}
+                title={movie.title}
                 rating={movie.vote_average}
                 year={movie.release_date.substring(0, 4)}
                 isMovie={true}
@@ -51,13 +51,13 @@ const HomePresenter = ({ nowPlaying, upComing, popular, loading, error }) => (
           </Section>
         )}
         {popular && popular.length > 0 && (
-          <Section title="Popular Movies">
+          <Section title="인기있는 영화">
             {popular.map((movie) => (
               <Poster
                 key={movie.id}
                 id={movie.id}
                 imageUrl={movie.poster_path}
-                title={movie.original_title}
+                title={movie.title}
                 rating={movie.vote_average}
                 year={movie.release_date.substring(0, 4)}
                 isMovie={true}
