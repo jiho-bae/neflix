@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
-import Loader from "Components/Loader";
-import Message from "Components/Message";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import Loader from "Components/Loader";
+import Message from "Components/Message";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -97,6 +99,10 @@ const CCarousel = styled(Carousel)`
     background-color: rgba(20, 20, 20, 0.5);
   }
 `;
+const TabContainer = styled.div`
+  margin-top: 10px;
+  width: 70%;
+`;
 
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
@@ -155,15 +161,34 @@ const DetailPresenter = ({ result, loading, error }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          {result.videos.results && result.videos.results.length > 0 && (
-            <VideoContainer>
-              <CCarousel arrows slidesPerPage={1}>
-                {result.videos.results.map((video, index) => (
-                  <Video key={index} src={`https://www.youtube.com/embed/${video.key}`} frameborder="0" />
-                ))}
-              </CCarousel>
-            </VideoContainer>
-          )}
+          <TabContainer>
+            {" "}
+            <Tabs>
+              <TabList>
+                {result.videos.results && result.videos.results.length > 0 && <Tab>유투브 영상</Tab>}
+                <Tab>제작사</Tab>
+                <Tab>시리즈</Tab>
+              </TabList>
+
+              {result.videos.results && result.videos.results.length > 0 && (
+                <TabPanel>
+                  <VideoContainer>
+                    <CCarousel arrows slidesPerPage={1}>
+                      {result.videos.results.map((video, index) => (
+                        <Video key={index} src={`https://www.youtube.com/embed/${video.key}`} frameborder="0" />
+                      ))}
+                    </CCarousel>
+                  </VideoContainer>
+                </TabPanel>
+              )}
+              <TabPanel>
+                <h2>Any content 2</h2>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 3</h2>
+              </TabPanel>
+            </Tabs>
+          </TabContainer>
         </Data>
       </Content>
     </Container>
