@@ -1,18 +1,21 @@
 {
   "files": {
-    "main.js": "/github.io/neflix/static/js/main.c32f617f.chunk.js",
-    "main.js.map": "/github.io/neflix/static/js/main.c32f617f.chunk.js.map",
+    "main.js": "/github.io/neflix/static/js/main.c60091d9.chunk.js",
+    "main.js.map": "/github.io/neflix/static/js/main.c60091d9.chunk.js.map",
     "runtime-main.js": "/github.io/neflix/static/js/runtime-main.c1693a02.js",
     "runtime-main.js.map": "/github.io/neflix/static/js/runtime-main.c1693a02.js.map",
-    "static/js/2.b4bae5b6.chunk.js": "/github.io/neflix/static/js/2.b4bae5b6.chunk.js",
-    "static/js/2.b4bae5b6.chunk.js.map": "/github.io/neflix/static/js/2.b4bae5b6.chunk.js.map",
+    "static/css/2.15c72766.chunk.css": "/github.io/neflix/static/css/2.15c72766.chunk.css",
+    "static/js/2.f1ed3986.chunk.js": "/github.io/neflix/static/js/2.f1ed3986.chunk.js",
+    "static/js/2.f1ed3986.chunk.js.map": "/github.io/neflix/static/js/2.f1ed3986.chunk.js.map",
     "index.html": "/github.io/neflix/index.html",
-    "static/js/2.b4bae5b6.chunk.js.LICENSE.txt": "/github.io/neflix/static/js/2.b4bae5b6.chunk.js.LICENSE.txt",
+    "static/css/2.15c72766.chunk.css.map": "/github.io/neflix/static/css/2.15c72766.chunk.css.map",
+    "static/js/2.f1ed3986.chunk.js.LICENSE.txt": "/github.io/neflix/static/js/2.f1ed3986.chunk.js.LICENSE.txt",
     "static/media/noPosterSmall.png": "/github.io/neflix/static/media/noPosterSmall.ea2ad102.png"
   },
   "entrypoints": [
     "static/js/runtime-main.c1693a02.js",
-    "static/js/2.b4bae5b6.chunk.js",
-    "static/js/main.c32f617f.chunk.js"
+    "static/css/2.15c72766.chunk.css",
+    "static/js/2.f1ed3986.chunk.js",
+    "static/js/main.c60091d9.chunk.js"
   ]
 }
