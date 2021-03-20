@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
+import Carousel from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -78,6 +80,23 @@ const IMDBLink = styled.span`
   font-weight: 600;
   cursor: pointer;
 `;
+const VideoContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  width: 800px;
+  height: 600px;
+`;
+
+const Video = styled.iframe`
+  width: 680px;
+  height: 450px;
+`;
+
+const CCarousel = styled(Carousel)`
+  button {
+    background-color: rgba(20, 20, 20, 0.5);
+  }
+`;
 
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
@@ -136,6 +155,15 @@ const DetailPresenter = ({ result, loading, error }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          {result.videos.results && result.videos.results.length > 0 && (
+            <VideoContainer>
+              <CCarousel arrows slidesPerPage={1}>
+                {result.videos.results.map((video, index) => (
+                  <Video key={index} src={`https://www.youtube.com/embed/${video.key}`} frameborder="0" />
+                ))}
+              </CCarousel>
+            </VideoContainer>
+          )}
         </Data>
       </Content>
     </Container>
