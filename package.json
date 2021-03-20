@@ -28,7 +28,7 @@
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build"
   },
-  "homepage": "https://jiho-bae/github.io/neflix",
+  "homepage": "https://neflix.netlify.app",
   "eslintConfig": {
     "extends": [
       "react-app",
