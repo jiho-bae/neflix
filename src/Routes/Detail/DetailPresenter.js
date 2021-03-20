@@ -104,6 +104,40 @@ const TabContainer = styled.div`
   width: 70%;
 `;
 
+const CompanyContainer = styled.div`
+  width: 70%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  position: relative;
+  z-index: 1;
+`;
+
+const Companies = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 100%;
+  padding: 10px;
+  border-radius: 5px;
+`;
+
+const CompanyLogo = styled.div`
+  width: 100%;
+  height: 200px;
+  background: url(${(props) => props.bgImage}) no-repeat center;
+  opacity: ${(props) => (props.opacity ? props.opacity : "0.7")};
+  background-size: contain;
+`;
+
+const CompanyName = styled.h4`
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+`;
+
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
     <>
@@ -167,7 +201,7 @@ const DetailPresenter = ({ result, loading, error }) =>
               <TabList>
                 {result.videos.results && result.videos.results.length > 0 && <Tab>유투브 영상</Tab>}
                 <Tab>제작사</Tab>
-                <Tab>시리즈</Tab>
+                {result.seasons && result.seasons.length > 0 && <Tab>시리즈</Tab>}
               </TabList>
 
               {result.videos.results && result.videos.results.length > 0 && (
@@ -182,7 +216,21 @@ const DetailPresenter = ({ result, loading, error }) =>
                 </TabPanel>
               )}
               <TabPanel>
-                <h2>Any content 2</h2>
+                <CompanyContainer>
+                  {result.production_companies.map((company, index) => (
+                    <Companies key={index}>
+                      <CompanyLogo
+                        bgImage={
+                          company.logo_path
+                            ? `https://image.tmdb.org/t/p/original${company.logo_path}`
+                            : require("../../assets/noImage.png").default
+                        }
+                        opacity={!company.logo_path && "0.5"}
+                      ></CompanyLogo>
+                      <CompanyName>{company.name}</CompanyName>
+                    </Companies>
+                  ))}
+                </CompanyContainer>
               </TabPanel>
               <TabPanel>
                 <h2>Any content 3</h2>
