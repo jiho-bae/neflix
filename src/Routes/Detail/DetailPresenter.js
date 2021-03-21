@@ -109,7 +109,6 @@ const CompanyContainer = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
   position: relative;
   z-index: 1;
 `;
@@ -136,6 +135,23 @@ const CompanyName = styled.h4`
   text-align: center;
   font-size: 12px;
   font-weight: 600;
+`;
+
+const SeasonContainer = styled.div`
+  height: 420px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  grid-gap: 15px;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+`;
+
+const Season = styled.div`
+  height: 200px;
+  background: url(${(props) => props.bgImage}) no-repeat center;
+  background-size: contain;
+  cursor: pointer;
 `;
 
 const DetailPresenter = ({ result, loading, error }) =>
@@ -201,7 +217,7 @@ const DetailPresenter = ({ result, loading, error }) =>
               <TabList>
                 {result.videos.results && result.videos.results.length > 0 && <Tab>유투브 영상</Tab>}
                 <Tab>제작사</Tab>
-                {result.seasons && result.seasons.length > 0 && <Tab>시리즈</Tab>}
+                {result.seasons && result.seasons.length > 0 && <Tab>시즌</Tab>}
               </TabList>
 
               {result.videos.results && result.videos.results.length > 0 && (
@@ -232,9 +248,15 @@ const DetailPresenter = ({ result, loading, error }) =>
                   ))}
                 </CompanyContainer>
               </TabPanel>
-              <TabPanel>
-                <h2>Any content 3</h2>
-              </TabPanel>
+              {result.seasons && result.seasons.length > 0 && (
+                <TabPanel>
+                  <SeasonContainer>
+                    {result.seasons.map((season, index) => (
+                      <Season key={index} bgImage={`https://image.tmdb.org/t/p/original${season.poster_path}`}></Season>
+                    ))}
+                  </SeasonContainer>
+                </TabPanel>
+              )}
             </Tabs>
           </TabContainer>
         </Data>
