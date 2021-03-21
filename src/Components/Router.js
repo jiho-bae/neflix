@@ -3,6 +3,7 @@ import { HashRouter as Router, Redirect, Route, Switch } from "react-router-dom"
 import Detail from "Routes/Detail";
 import Home from "Routes/Home";
 import Search from "Routes/Search";
+import Season from "Routes/Season";
 import TV from "Routes/TV";
 import Header from "./Header";
 
@@ -16,6 +17,7 @@ export default () => (
         <Route path="/search" component={Search} />
         <Route path="/movie/:id" component={Detail} />
         <Route path="/show/:id" component={Detail} />
+        <Route path="/season/:id/:seasonId" component={Season} />
         <Redirect from="*" to="/" />
       </Switch>
     </>

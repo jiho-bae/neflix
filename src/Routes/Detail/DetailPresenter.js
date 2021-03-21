@@ -8,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -151,7 +152,6 @@ const Season = styled.div`
   height: 200px;
   background: url(${(props) => props.bgImage}) no-repeat center;
   background-size: contain;
-  cursor: pointer;
 `;
 
 const DetailPresenter = ({ result, loading, error }) =>
@@ -167,7 +167,7 @@ const DetailPresenter = ({ result, loading, error }) =>
   ) : (
     <Container>
       <Helmet>
-        <title>{result.original_title ? result.original_title : result.original_name} | Neflix</title>
+        <title>{result.title ? result.title : result.name} | Neflix</title>
       </Helmet>
       <Backdrop bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}></Backdrop>
       <Content>
@@ -252,7 +252,18 @@ const DetailPresenter = ({ result, loading, error }) =>
                 <TabPanel>
                   <SeasonContainer>
                     {result.seasons.map((season, index) => (
-                      <Season key={index} bgImage={`https://image.tmdb.org/t/p/original${season.poster_path}`}></Season>
+                      <Link to={`/season/${result.id}/${season.season_number}`} key={season.id}>
+                        <Season
+                          key={index}
+                          bgImage={
+                            season.poster_path
+                              ? `https://image.tmdb.org/t/p/original${season.poster_path}`
+                              : result.poster_path
+                              ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                              : require("../../assets/noPosterSmall.png").default
+                          }
+                        ></Season>
+                      </Link>
                     ))}
                   </SeasonContainer>
                 </TabPanel>

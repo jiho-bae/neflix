@@ -47,19 +47,21 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
-  <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
+const Poster = ({ id, imageUrl, title, rating, year, isMovie = false, isSeason = false }) => (
+  <Link to={isMovie ? `/movie/${id}` : isSeason ? `/showDetail/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
         <Image bgUrl={imageUrl ? `https://image.tmdb.org/t/p/w300${imageUrl}` : require("../assets/noPosterSmall.png").default} />
-        <Rating>
-          <span role="img" aria-label="rating">
-            ⭐️
-          </span>{" "}
-          {rating}/10
-        </Rating>
+        {rating ? (
+          <Rating>
+            <span role="img" aria-label="rating">
+              ⭐️
+            </span>{" "}
+            {rating}/10
+          </Rating>
+        ) : null}
       </ImageContainer>
-      <Title>{title.length > 18 ? `${title.substring(0, 18)}...` : title}</Title>
+      <Title>{isSeason ? title : title.length > 18 ? `${title.substring(0, 18)}...` : title}</Title>
       <Year>{year}</Year>
     </Container>
   </Link>
@@ -72,6 +74,7 @@ Poster.propTypes = {
   rating: PropTypes.number,
   year: PropTypes.string,
   isMovie: PropTypes.bool,
+  isSeason: PropTypes.bool,
 };
 
 export default Poster;

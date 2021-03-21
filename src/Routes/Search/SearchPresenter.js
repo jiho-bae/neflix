@@ -25,7 +25,7 @@ const Input = styled.input`
 const SearchPresenter = ({ movieResults, tvResults, loading, error, searchTerm, handleSubmit, updateTerm }) => (
   <Container>
     <Helmet>
-      <title>Search | Neflix</title>
+      <title>검색 | Neflix</title>
     </Helmet>
     <Form onSubmit={handleSubmit}>
       <Input placeholder="TV 프로그램, 영화 제목을 검색하세요!" value={searchTerm} onChange={updateTerm} />

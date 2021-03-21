@@ -14,7 +14,7 @@ const Container = styled.div`
 const HomePresenter = ({ nowPlaying, upComing, popular, loading, error }) => (
   <>
     <Helmet>
-      <title>Movies | Neflix</title>
+      <title>영화 | Neflix</title>
     </Helmet>
     {loading ? (
       <Loader />

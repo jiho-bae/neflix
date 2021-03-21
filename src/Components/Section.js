@@ -13,22 +13,28 @@ const Title = styled.span`
   font-weight: 600;
 `;
 
+const SeasonTitle = styled.span`
+  font-size: 25px;
+  font-weight: 600;
+`;
+
 const Grid = styled.div`
   margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 125px);
   grid-gap: 25px;
 `;
-
-const Section = ({ title, children }) => (
+const Section = ({ title, seasonTitle, children }) => (
   <Container>
-    <Title>{title}</Title>
+    {title ? <Title>{title}</Title> : <SeasonTitle>{seasonTitle}</SeasonTitle>}
+
     <Grid>{children}</Grid>
   </Container>
 );
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  seasonTitle: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
