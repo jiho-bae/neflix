@@ -139,22 +139,74 @@ const CompanyName = styled.h4`
 `;
 
 const SeasonContainer = styled.div`
+  padding-right: 10px;
   height: 420px;
   display: grid;
   grid-template-columns: repeat(5, minmax(100px, 1fr));
+  grid-template-rows: auto;
   grid-gap: 15px;
   position: relative;
   z-index: 1;
   overflow-y: auto;
 `;
 
-const Season = styled.div`
-  height: 200px;
-  background: url(${(props) => props.bgImage}) no-repeat center;
-  background-size: contain;
+const SeasonItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
+const Season = styled.div`
+  height: 200px;
+  background-image: url(${(props) => props.bgImage});
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 3px;
+`;
+
+const SeasonTitle = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+`;
+
+const CreditContainer = styled.div`
+  padding-right: 10px;
+  width: 100%;
+  height: 420px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  grid-gap: 10px;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+`;
+
+const Credits = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+`;
+
+const CreditProfile = styled.div`
+  height: 200px;
+  background-image: url(${(props) => props.bgImage});
+  background-size: cover;
+  background-position: center;
+  opacity: ${(props) => (props.opacity ? props.opacity : "1")};
+  margin-bottom: 3px;
+`;
+
+const CreditRole = styled.span`
+  font-size: 12px;
+  margin-bottom: 3px;
+`;
+
+const CreditName = styled.span`
+  font-size: 10px;
+  color: #95a5a6;
+`;
+
+const DetailPresenter = ({ result, credits, loading, error }) =>
   loading ? (
     <>
       <Helmet>
@@ -216,6 +268,8 @@ const DetailPresenter = ({ result, loading, error }) =>
             <Tabs>
               <TabList>
                 {result.videos.results && result.videos.results.length > 0 && <Tab>유투브 영상</Tab>}
+                {credits.cast && credits.cast.length > 0 && <Tab>출연진</Tab>}
+                {credits.crew && credits.crew.length > 0 && <Tab>제작진</Tab>}
                 <Tab>제작사</Tab>
                 {result.seasons && result.seasons.length > 0 && <Tab>시즌</Tab>}
               </TabList>
@@ -229,6 +283,46 @@ const DetailPresenter = ({ result, loading, error }) =>
                       ))}
                     </CCarousel>
                   </VideoContainer>
+                </TabPanel>
+              )}
+              {credits.cast && credits.cast.length > 0 && (
+                <TabPanel>
+                  <CreditContainer>
+                    {credits.cast.map((credit, index) => (
+                      <Credits>
+                        <CreditProfile
+                          bgImage={
+                            credit.profile_path
+                              ? `https://image.tmdb.org/t/p/original${credit.profile_path}`
+                              : require("../../assets/noProfile.png").default
+                          }
+                          opacity={!credit.profile_path && "0.25"}
+                        ></CreditProfile>
+                        <CreditRole>{credit.character}</CreditRole>
+                        <CreditName>{credit.name}</CreditName>
+                      </Credits>
+                    ))}
+                  </CreditContainer>
+                </TabPanel>
+              )}
+              {credits.crew && credits.crew.length > 0 && (
+                <TabPanel>
+                  <CreditContainer>
+                    {credits.crew.map((credit, index) => (
+                      <Credits>
+                        <CreditProfile
+                          bgImage={
+                            credit.profile_path
+                              ? `https://image.tmdb.org/t/p/original${credit.profile_path}`
+                              : require("../../assets/noProfile.png").default
+                          }
+                          opacity={!credit.profile_path && "0.25"}
+                        ></CreditProfile>
+                        <CreditRole>{credit.job}</CreditRole>
+                        <CreditName>{credit.name}</CreditName>
+                      </Credits>
+                    ))}
+                  </CreditContainer>
                 </TabPanel>
               )}
               <TabPanel>
@@ -253,16 +347,19 @@ const DetailPresenter = ({ result, loading, error }) =>
                   <SeasonContainer>
                     {result.seasons.map((season, index) => (
                       <Link to={`/season/${result.id}/${season.season_number}`} key={season.id}>
-                        <Season
-                          key={index}
-                          bgImage={
-                            season.poster_path
-                              ? `https://image.tmdb.org/t/p/original${season.poster_path}`
-                              : result.poster_path
-                              ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-                              : require("../../assets/noPosterSmall.png").default
-                          }
-                        ></Season>
+                        <SeasonItem>
+                          <Season
+                            key={index}
+                            bgImage={
+                              season.poster_path
+                                ? `https://image.tmdb.org/t/p/original${season.poster_path}`
+                                : result.poster_path
+                                ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                                : require("../../assets/noPosterSmall.png").default
+                            }
+                          ></Season>
+                          <SeasonTitle>{result.title ? `${result.title} ${season.name}` : `${result.name} ${season.name}`}</SeasonTitle>
+                        </SeasonItem>
                       </Link>
                     ))}
                   </SeasonContainer>
@@ -277,6 +374,7 @@ const DetailPresenter = ({ result, loading, error }) =>
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
+  credits: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };

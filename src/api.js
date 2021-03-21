@@ -24,6 +24,7 @@ export const moviesApi = {
         query: term,
       },
     }),
+  credits: (id) => api.get(`movie/${id}/credits`),
 };
 
 export const tvApi = {
@@ -43,4 +44,5 @@ export const tvApi = {
       },
     }),
   season: (id, seasonId) => api.get(`tv/${id}/season/${seasonId}`),
+  credits: (id) => api.get(`tv/${id}/credits`),
 };

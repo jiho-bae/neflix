@@ -43,7 +43,7 @@ const SearchPresenter = ({ movieResults, tvResults, loading, error, searchTerm, 
                 imageUrl={movie.poster_path}
                 title={movie.title}
                 rating={movie.vote_average}
-                year={movie.release_date.substring(0, 4)}
+                year={movie.release_date ? movie.release_date.substring(0, 4) : null}
                 isMovie={true}
               />
             ))}
@@ -58,7 +58,7 @@ const SearchPresenter = ({ movieResults, tvResults, loading, error, searchTerm, 
                 imageUrl={show.poster_path}
                 title={show.name}
                 rating={show.vote_average}
-                year={show.first_air_date.substring(0, 4)}
+                year={show.first_air_date ? show.first_air_date.substring(0, 4) : null}
                 isMovie={false}
               />
             ))}
