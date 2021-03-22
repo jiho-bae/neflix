@@ -270,7 +270,7 @@ const DetailPresenter = ({ result, credits, loading, error }) =>
                 {result.videos.results && result.videos.results.length > 0 && <Tab>유투브 영상</Tab>}
                 {credits.cast && credits.cast.length > 0 && <Tab>출연진</Tab>}
                 {credits.crew && credits.crew.length > 0 && <Tab>제작진</Tab>}
-                <Tab>제작사</Tab>
+                {result.production_companies && result.production_companies.length > 0 && <Tab>제작사</Tab>}
                 {result.seasons && result.seasons.length > 0 && <Tab>시즌</Tab>}
               </TabList>
 
@@ -325,23 +325,25 @@ const DetailPresenter = ({ result, credits, loading, error }) =>
                   </CreditContainer>
                 </TabPanel>
               )}
-              <TabPanel>
-                <CompanyContainer>
-                  {result.production_companies.map((company, index) => (
-                    <Companies key={index}>
-                      <CompanyLogo
-                        bgImage={
-                          company.logo_path
-                            ? `https://image.tmdb.org/t/p/original${company.logo_path}`
-                            : require("../../assets/noImage.png").default
-                        }
-                        opacity={!company.logo_path && "0.5"}
-                      ></CompanyLogo>
-                      <CompanyName>{company.name}</CompanyName>
-                    </Companies>
-                  ))}
-                </CompanyContainer>
-              </TabPanel>
+              {result.production_companies && result.production_companies.length > 0 && (
+                <TabPanel>
+                  <CompanyContainer>
+                    {result.production_companies.map((company, index) => (
+                      <Companies key={index}>
+                        <CompanyLogo
+                          bgImage={
+                            company.logo_path
+                              ? `https://image.tmdb.org/t/p/original${company.logo_path}`
+                              : require("../../assets/noImage.png").default
+                          }
+                          opacity={!company.logo_path && "0.5"}
+                        ></CompanyLogo>
+                        <CompanyName>{company.name}</CompanyName>
+                      </Companies>
+                    ))}
+                  </CompanyContainer>
+                </TabPanel>
+              )}
               {result.seasons && result.seasons.length > 0 && (
                 <TabPanel>
                   <SeasonContainer>
