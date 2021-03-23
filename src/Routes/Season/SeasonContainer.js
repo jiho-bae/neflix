@@ -10,8 +10,6 @@ export default class extends React.Component {
     loading: true,
   };
   async componentDidMount() {
-    {
-    }
     const {
       match: {
         params: { id, seasonId },

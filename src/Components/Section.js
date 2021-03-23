@@ -27,7 +27,6 @@ const Grid = styled.div`
 const Section = ({ title, seasonTitle, children }) => (
   <Container>
     {title ? <Title>{title}</Title> : <SeasonTitle>{seasonTitle}</SeasonTitle>}
-
     <Grid>{children}</Grid>
   </Container>
 );

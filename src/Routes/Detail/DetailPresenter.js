@@ -127,7 +127,7 @@ const CompanyLogo = styled.div`
   width: 100%;
   height: 200px;
   background: url(${(props) => props.bgImage}) no-repeat center;
-  opacity: ${(props) => (props.opacity ? props.opacity : "0.7")};
+  opacity: ${(props) => (props.opacity ? "0.5" : "0.7")};
   background-size: contain;
 `;
 
@@ -192,7 +192,7 @@ const CreditProfile = styled.div`
   background-image: url(${(props) => props.bgImage});
   background-size: cover;
   background-position: center;
-  opacity: ${(props) => (props.opacity ? props.opacity : "1")};
+  opacity: ${(props) => (props.opacity ? "0.25" : "1")};
   margin-bottom: 3px;
 `;
 
@@ -289,14 +289,14 @@ const DetailPresenter = ({ result, credits, loading, error }) =>
                 <TabPanel>
                   <CreditContainer>
                     {credits.cast.map((credit, index) => (
-                      <Credits>
+                      <Credits key={index}>
                         <CreditProfile
                           bgImage={
                             credit.profile_path
                               ? `https://image.tmdb.org/t/p/original${credit.profile_path}`
                               : require("../../assets/noProfile.png").default
                           }
-                          opacity={!credit.profile_path && "0.25"}
+                          opacity={credit.profile_path ?? null}
                         ></CreditProfile>
                         <CreditRole>{credit.character}</CreditRole>
                         <CreditName>{credit.name}</CreditName>
@@ -309,14 +309,14 @@ const DetailPresenter = ({ result, credits, loading, error }) =>
                 <TabPanel>
                   <CreditContainer>
                     {credits.crew.map((credit, index) => (
-                      <Credits>
+                      <Credits key={index}>
                         <CreditProfile
                           bgImage={
                             credit.profile_path
                               ? `https://image.tmdb.org/t/p/original${credit.profile_path}`
                               : require("../../assets/noProfile.png").default
                           }
-                          opacity={!credit.profile_path && "0.25"}
+                          opacity={credit.profile_path ?? null}
                         ></CreditProfile>
                         <CreditRole>{credit.job}</CreditRole>
                         <CreditName>{credit.name}</CreditName>
@@ -336,7 +336,7 @@ const DetailPresenter = ({ result, credits, loading, error }) =>
                               ? `https://image.tmdb.org/t/p/original${company.logo_path}`
                               : require("../../assets/noImage.png").default
                           }
-                          opacity={!company.logo_path && "0.5"}
+                          opacity={company.logo_path ?? null}
                         ></CompanyLogo>
                         <CompanyName>{company.name}</CompanyName>
                       </Companies>
