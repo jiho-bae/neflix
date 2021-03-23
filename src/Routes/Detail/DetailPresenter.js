@@ -127,7 +127,7 @@ const CompanyLogo = styled.div`
   width: 100%;
   height: 200px;
   background: url(${(props) => props.bgImage}) no-repeat center;
-  opacity: ${(props) => (props.opacity ? "0.5" : "0.7")};
+  opacity: ${(props) => (props.opacity ? "0.7" : "0.5")};
   background-size: contain;
 `;
 
@@ -192,7 +192,7 @@ const CreditProfile = styled.div`
   background-image: url(${(props) => props.bgImage});
   background-size: cover;
   background-position: center;
-  opacity: ${(props) => (props.opacity ? "0.25" : "1")};
+  opacity: ${(props) => (props.opacity ? "1" : "0.25")};
   margin-bottom: 3px;
 `;
 
